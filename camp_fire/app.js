@@ -8,20 +8,22 @@ var pikePlace = {
   averagePound: 0.34,
   customerHour:[],
   randomNum : function(minCustomer, maxCustomer) {
-    this.customerHour.push( Math.floor(Math.random() * (maxCustomer - minCustomer) + minCustomer));
+    for ( var i = 0; i < hours.length; i++){
+      this.customerHour.push( Math.floor(Math.random() * (maxCustomer - minCustomer) + minCustomer));
+    }
   },
-  // getRandomCus : function() {
-  //   var tempRandom = this.randomNum(this.minCustomer, this.maxCustomer);
-  //   return tempRandom;
-  // },
-  // calcCupPerCus : function() {
-  //   var cupsPerCus = (tempRandom * this.averageCup);
-  //   return cupsPerCus;
-  // },
-  // calcPoundPerCus : function() {
-  //   var poundsPerCus = (tempRandom * this.averagePound) + (cupsPerCus / 16);
-  //   return poundsPerCus;
-  // },
+//   getRandomCus : function() {
+//     var tempRandom = this.randomNum(this.minCustomer, this.maxCustomer);
+//     return tempRandom;
+//   },
+//   calcCupPerCus : function() {
+//     var cupsPerCus = (tempRandom * this.averageCup);
+//     return cupsPerCus;
+//   },
+//   calcPoundPerCus : function() {
+//     var poundsPerCus = (tempRandom * this.averagePound) + (cupsPerCus / 16);
+//     return poundsPerCus;
+//   },
 };
 pikePlace.randomNum(pikePlace.minCustomer, pikePlace.maxCustomer);
 // pikePlace.getRandomCus();
