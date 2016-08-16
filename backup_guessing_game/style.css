@@ -1,0 +1,96 @@
+body{
+  background-color:#ccc;
+  padding: 0px 20px;
+}
+
+h1{
+ font-size: 1.5em;
+ color: blue;
+
+}
+
+h1:hover{
+text-decoration: underline;
+}
+
+h3{
+  font-size: 1em;
+  margin: .5em;
+}
+
+p{
+  font-size:1em;
+    margin: .5em;
+
+}
+h4{
+  text-align: center;
+}
+li{
+  padding: 10px 5px;
+
+}
+
+
+section{
+  background-color:#fff;
+  width:80%;
+
+}
+ol{
+  list-style-type: upper-roman;
+}
+
+img{
+  padding-top: 10px;
+  border-radius:100%;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 5px 10px 8px #888;
+}
+
+#wrapper{
+  background-color: #000;
+  max-width:1100px;
+
+}
+
+.languages li{
+  display: inline-block;
+}
+.knowledge{
+  background-color: lightblue;
+  width: 200px;
+  border-radius:5px;
+  margin: 0 auto;
+}
+button{
+  width: 50px;
+  float: right;
+}
+
+h1{
+
+}
+#likes{
+  border-radius:5%;
+  margin: 0 auto;
+  background-color: lightgreen;
+  width: 200px;
+}
+
+#hideMe li{
+   list-style-type:none;
+   display:inline-block;
+}
+
+#hideMe li:hover{
+   opacity: 0.8;
+   text-decoration:underline;
+   background-color: #4B41B8;
+   width: auto;
+}
+
+#main-nav{
+   background-color: #685BFF;
+}

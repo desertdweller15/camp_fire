@@ -16,6 +16,7 @@ var pikePlaceMarket = {
   totalPnd: 0,  //Total pounds to-go sold for the entire day
   totalNetPnd: 0,  //Total pounds of beans sold for the entire day
   totalCust: 0, //Total number of customers for the entire day
+  totalnumEmp: 0,
   ulEl: document.getElementById('PikePlace'),
   randomCustHr: function() {
     for (var i = 0; i < hours.length; i++) {
@@ -65,6 +66,12 @@ var pikePlaceMarket = {
       this.totalCust += this.customerHour [i];
     }
   },
+
+  totalnumEmpCalc: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.totalnumEmp += this.numEmp [i];
+    }
+  },
   numEmpCalc: function() {
     for (var i = 0; i < hours.length; i++) {
       if ((this.customerHour [i] / 30) >= 1) {
@@ -94,9 +101,40 @@ pikePlaceMarket.netPndCalc();
 pikePlaceMarket.totalNetPndCalc();
 pikePlaceMarket.totalCustCalc();
 pikePlaceMarket.numEmpCalc();
+pikePlaceMarket.totalnumEmpCalc();
 pikePlaceMarket.render();
+// console.log('Number of employees needed at Pike Place Market for each hour:',this.numEmp);
+var pPMEl = document.getElementById('PikePlace');
+function makeDataListPPM() {
 
-console.log('Number of employees needed at Pike Place Market for each hour:',this.numEmp);
+  for (var i in hours) {
+    var dataLiEl = document.createElement('li');
+    dataLiEl.textContent = hours[i] + ': ' + pikePlaceMarket.pndPerCup[i].toFixed(2) + 'lbs [' + pikePlaceMarket.customerHour[i] +  'customers,' + pikePlaceMarket.cupsHr[i].toFixed(2) +  'cups (' + pikePlaceMarket.pndPerCup[i].toFixed(2) + ' lbs),'  + pikePlaceMarket.pndHR[i].toFixed(2) + ' lbs to-go]';
+    pPMEl.appendChild(dataLiEl);
+  }
+};
+
+makeDataListPPM();
+function makeLocationTotalPPM() {
+  var totalCustomersLiEl = document.createElement('li');
+  totalCustomersLiEl.textContent = 'Total customers at Pike Place Market:'  + pikePlaceMarket.totalCust;
+  var totalCupsLiEl = document.createElement('li');
+  totalCupsLiEl.textContent = 'Total cups sold at Pike Place Market: ' + pikePlaceMarket.totalCups.toFixed(2);
+  var totalPoundsToGoLiEl = document.createElement('li');
+  totalPoundsToGoLiEl.textContent = 'Total to-go pound packages sold at Pike Place Market: ' + pikePlaceMarket.totalPnd.toFixed(2);
+  var totalPoundsOverAllLiEl = document.createElement('li');
+  totalPoundsOverAllLiEl.textContent = 'Total pounds of beans needed at Pike Place Market: ' + pikePlaceMarket.totalNetPnd.toFixed(2);
+  var totalEmployeesOverAllLiEl = document.createElement('li');
+  totalEmployeesOverAllLiEl.textContent = 'Total amount of employees needed at Pike Place Market: ' + pikePlaceMarket.totalnumEmp.toFixed(2);
+  pPMEl.appendChild(totalCustomersLiEl);
+  pPMEl.appendChild(totalCupsLiEl);
+  pPMEl.appendChild(totalPoundsToGoLiEl);
+  pPMEl.appendChild(totalPoundsOverAllLiEl);
+  pPMEl.appendChild(totalEmployeesOverAllLiEl);
+
+
+};
+makeLocationTotalPPM();
 
 var CapitolHill = {
   name: 'Capitol Hill',
@@ -190,15 +228,7 @@ CapitolHill.numEmpCalc();
 CapitolHill.render();
 console.log('Number of employees needed at Capitol Hill for each hour:',this.numEmp);
 
-// Adding the Capitol Hill information to data.html
-for (var i = 0; i < hours.length; i++) {
-  var liEl = document.createElement('li');
-  liEl.textContent = hours[i] + ': ' + CapitolHill.netPnd[i] + ' lbs [' + CapitolHill.customerHour[i] + ' customers, ' + CapitolHill.cupsHr[i] + ' cups (' + CapitolHill.pndPerCup[i] + ' lbs), ' + CapitolHill.pndHR[i] + ' lbs to-go]';
-  CapitolHill.ulEl.appendChild(liEl);
-}
 
-
-CapitolHill.render();
 
 var SeattlePublicLibrary = {
   name: 'Seattle Public Library',
