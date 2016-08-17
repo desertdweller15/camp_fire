@@ -16,7 +16,7 @@ var pikePlaceMarket = {
   totalPnd: 0,  //Total pounds to-go sold for the entire day
   totalNetPnd: 0,  //Total pounds of beans sold for the entire day
   totalCust: 0, //Total number of customers for the entire day
-  totalnumEmp: 0,
+  totalnumEmp: 0,//Total number of employees needed for the entire day
   ulEl: document.getElementById('PikePlace'),
   randomCustHr: function() {
     for (var i = 0; i < hours.length; i++) {
@@ -103,7 +103,8 @@ pikePlaceMarket.totalCustCalc();
 pikePlaceMarket.numEmpCalc();
 pikePlaceMarket.totalnumEmpCalc();
 pikePlaceMarket.render();
-// console.log('Number of employees needed at Pike Place Market for each hour:',this.numEmp);
+console.log('Number of employees needed at Pike Place Market for each hour:',this.numEmp);
+
 var pPMEl = document.getElementById('PikePlace');
 function makeDataListPPM() {
 
@@ -136,6 +137,7 @@ function makeLocationTotalPPM() {
 };
 makeLocationTotalPPM();
 
+
 var CapitolHill = {
   name: 'Capitol Hill',
   minCustomer: 12,
@@ -152,6 +154,7 @@ var CapitolHill = {
   totalPnd: 0,  //Total pounds to-go sold for the entire day
   totalNetPnd: 0,  //Total pounds of beans sold for the entire day
   totalCust: 0, //Total number of customers for the entire day
+  totalnumEmp: 0,//Total number of employees needed for the entire day
   ulEl: document.getElementById('CapitolHill'),
   randomCustHr: function() {
     for (var i = 0; i < hours.length; i++) {
@@ -201,6 +204,11 @@ var CapitolHill = {
       this.totalCust += this.customerHour[i];
     }
   },
+  totalnumEmpCalc: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.totalnumEmp += this.numEmp [i];
+    }
+  },
   numEmpCalc: function() {
     for (var i = 0; i < hours.length; i++) {
       this.numEmp[i] = Math.ceil(this.customerHour[i] / 30);
@@ -228,6 +236,37 @@ CapitolHill.numEmpCalc();
 CapitolHill.render();
 console.log('Number of employees needed at Capitol Hill for each hour:',this.numEmp);
 
+var cHEl = document.getElementById('CapitolHill');
+function makeDataListCH() {
+
+  for (var i in hours) {
+    var dataLiEl = document.createElement('li');
+    dataLiEl.textContent = hours[i] + ': ' + CapitolHill.pndPerCup[i].toFixed(2) + 'lbs [' + CapitolHill.customerHour[i] +  'customers,' + CapitolHill.cupsHr[i].toFixed(2) +  'cups (' + CapitolHill.pndPerCup[i].toFixed(2) + ' lbs),'  + CapitolHill.pndHR[i].toFixed(2) + ' lbs to-go]';
+    cHEl.appendChild(dataLiEl);
+  }
+};
+
+makeDataListCH();
+function makeLocationTotalCH() {
+  var totalCustomersLiEl = document.createElement('li');
+  totalCustomersLiEl.textContent = 'Total customers at Capitol Hill:'  + CapitolHill.totalCust;
+  var totalCupsLiEl = document.createElement('li');
+  totalCupsLiEl.textContent = 'Total cups sold at Capitol Hill: ' + CapitolHill.totalCups.toFixed(2);
+  var totalPoundsToGoLiEl = document.createElement('li');
+  totalPoundsToGoLiEl.textContent = 'Total to-go pound packages sold at Capitol Hill: ' + CapitolHill.totalPnd.toFixed(2);
+  var totalPoundsOverAllLiEl = document.createElement('li');
+  totalPoundsOverAllLiEl.textContent = 'Total pounds of beans needed at Capitol Hill: ' + CapitolHill.totalNetPnd.toFixed(2);
+  var totalEmployeesOverAllLiEl = document.createElement('li');
+  totalEmployeesOverAllLiEl.textContent = 'Total amount of employees needed at Capitol Hill: ' + CapitolHill.totalnumEmp.toFixed(2);
+  cHEl.appendChild(totalCustomersLiEl);
+  cHEl.appendChild(totalCupsLiEl);
+  cHEl.appendChild(totalPoundsToGoLiEl);
+  cHEl.appendChild(totalPoundsOverAllLiEl);
+  cHEl.appendChild(totalEmployeesOverAllLiEl);
+
+
+};
+makeLocationTotalCH();
 
 
 var SeattlePublicLibrary = {
@@ -296,6 +335,11 @@ var SeattlePublicLibrary = {
       this.totalCust += this.customerHour[i];
     }
   },
+  totalnumEmpCalc: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.totalnumEmp += this.numEmp [i];
+    }
+  },
   numEmpCalc: function() {
     for (var i = 0; i < hours.length; i++) {
       this.numEmp[i] = Math.ceil(this.customerHour[i] / 30);
@@ -320,10 +364,41 @@ SeattlePublicLibrary.netPndCalc();
 SeattlePublicLibrary.totalNetPndCalc();
 SeattlePublicLibrary.totalCustCalc();
 SeattlePublicLibrary.numEmpCalc();
+SeattlePublicLibrary.numEmpCalc();
 SeattlePublicLibrary.render();
 console.log('Number of employees needed at Seattle Public Library for each hour:',this.numEmp);
 
-SeattlePublicLibrary.render();
+// var splMEl = document.getElementById('SeattlePublicLibrary');
+// function makeDataListSPL() {
+//
+//   for (var i in hours) {
+//     var dataLiEl = document.createElement('li');
+//     dataLiEl.textContent = hours[i] + ': ' + SeattlePublicLibrary.pndPerCup[i].toFixed(2) + 'lbs [' + SeattlePublicLibrary.customerHour[i] +  'customers,' + SeattlePublicLibrary.cupsHr[i].toFixed(2) +  'cups (' + SeattlePublicLibrary.pndPerCup[i].toFixed(2) + ' lbs),'  + SeattlePublicLibrary.pndHR[i].toFixed(2) + ' lbs to-go]';
+//     splMEl.appendChild(dataLiEl);
+//   }
+// };
+//
+// makeDataListSPL();
+// function makeLocationTotalSPL() {
+//   var totalCustomersLiEl = document.createElement('li');
+//   totalCustomersLiEl.textContent = 'Total customers at Seattle Public Library:'  + SeattlePublicLibrary.totalCust;
+//   var totalCupsLiEl = document.createElement('li');
+//   totalCupsLiEl.textContent = 'Total cups sold at Seattle Public Library: ' + SeattlePublicLibrary.totalCups.toFixed(2);
+//   var totalPoundsToGoLiEl = document.createElement('li');
+//   totalPoundsToGoLiEl.textContent = 'Total to-go pound packages sold at Seattle Public Library: ' + SeattlePublicLibrary.totalPnd.toFixed(2);
+//   var totalPoundsOverAllLiEl = document.createElement('li');
+//   totalPoundsOverAllLiEl.textContent = 'Total pounds of beans needed at Seattle Public Library: ' + SeattlePublicLibrary.totalNetPnd.toFixed(2);
+//   var totalEmployeesOverAllLiEl = document.createElement('li');
+//   totalEmployeesOverAllLiEl.textContent = 'Total amount of employees needed at Seattle Public Library: ' + SeattlePublicLibrary.totalnumEmp.toFixed(2);
+//   splMEl.appendChild(totalCustomersLiEl);
+//   splMEl.appendChild(totalCupsLiEl);
+//   splMEl.appendChild(totalPoundsToGoLiEl);
+//   splMEl.appendChild(totalPoundsOverAllLiEl);
+//   splMEl.appendChild(totalEmployeesOverAllLiEl);
+//
+//
+// };
+// makeLocationTotalCH();
 
 var SouthLakeUnion = {
   name: 'South Lake Union',
