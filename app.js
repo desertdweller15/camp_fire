@@ -1,6 +1,6 @@
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 var coffeeHouse = [];  //Array for storing the coffee shop objects
-var beanTableEL = document.getElementById('beans');
+var beansTableEl = document.getElementById('beans');
 var baristasTableEl = document.getElementById('baristas');
 
 //Constructor function to create coffee shop objects
@@ -10,17 +10,17 @@ function CoffeeShop(name, minCustomer, maxCustomer, averageCups, averagePound) {
   this.maxCustomer = maxCustomer;
   this.averageCups = averageCups;
   this.averagePound = averagePound;
-  this.customerHour = [];  //Number of customers for each hour
-  this.cupsHr = [];  //Projected cups sold for each hour
-  this.pndHR = [];  //Projected pounds to-go sold for each hour
-  this.pndPerCup = []; //Projected pounds of beans used for cup for each hour
-  this.netPnd = [];   //Projected pounds of beans used for both for each hour
-  this.numEmp = [];  //Number of employees needed for each hour
+  this.customerHour = [];  //Number of customers per hour
+  this.cupsHr = [];  //Cups sold per hour
+  this.pndHR = [];  //Pounds to-go sold per hour
+  this.pndPerCup = []; //Pounds of beans used for each cup per hour
+  this.netPnd = [];   //Pounds of beans used for both per hour
+  this.numEmp = [];  //Number of employees needed per hour
   this.totalCups = 0;  //Total cup sold for the day
-  this.totalPnd = 0;  //Total pounds to-go sold for the day
-  this.totalNetPnd = 0;  //Total pounds of beans sold altogether for the day
-  this.totalCust = 0; //Total number of customers for the day
-  this.totalnumEmp = 0; //Total number of employee hours for the day
+  this.totalPnd = 0;  //Total pounds to-go sold for the entire day
+  this.totalNetPnd = 0;  //Total pounds of beans sold for the entire day
+  this.totalCust = 0; //Total number of customers for the entire day
+  this.totalnumEmp = 0; //Total number of customers for the entire day
 };
 
 //Prototype method to calculate the necessary data to output
@@ -50,7 +50,7 @@ function tableHeader(tableName) {
   thEl[0] = document.createElement('th');
   thEl[1] = document.createElement('th');
   thEl[0].textContent = 'Locations';
-  if (tableName === bean) {
+  if (tableName === beans) {
     thEl[1].textContent = 'Daily Location Totals';
   } else {
     thEl[1].textContent = 'Total Employee Hours';
@@ -62,8 +62,8 @@ function tableHeader(tableName) {
     thEl[i + 2].textContent = hours[i];
     trEl.appendChild(thEl[i + 2]);
   }
-  if (tableName === bean) {
-    beanTableEL.appendChild(trEl);
+  if (tableName === beans) {
+    beansTableEl.appendChild(trEl);
   } else {
     baristasTableEl.appendChild(trEl);
   }
@@ -78,14 +78,14 @@ CoffeeShop.prototype.render = function(tableName) {
   }
   tdEl[0].textContent = this.name;
   trEl.appendChild(tdEl[0]);
-  if (tableName === bean) {
+  if (tableName === beans) {
     tdEl[1].textContent = this.totalNetPnd;
     trEl.appendChild(tdEl[1]);
     for (var i = 0; i < hours.length; i++) {
       tdEl[i + 2].textContent = this.netPnd[i];
       trEl.appendChild(tdEl[i + 2]);
     }
-    beanTableEL.appendChild(trEl);
+    beansTableEl.appendChild(trEl);
   } else {
     tdEl[1].textContent = this.totalnumEmp;
     trEl.appendChild(tdEl[1]);
@@ -105,7 +105,7 @@ function tableTotal(tableName) {
   tdEl[0].textContent = 'Totals';
   trEl.appendChild(tdEl[0]);
   tdEl[1] = document.createElement('td');
-  if (tableName === bean) {
+  if (tableName === beans) {
     tdEl[1].textContent = parseFloat((coffeeHouse[0].totalNetPnd + coffeeHouse[1].totalNetPnd + coffeeHouse[2].totalNetPnd + coffeeHouse[3].totalNetPnd + coffeeHouse[4].totalNetPnd).toFixed(2));
     trEl.appendChild(tdEl[1]);
     for (var i = 0; i < hours.length; i++) {
@@ -117,7 +117,7 @@ function tableTotal(tableName) {
       tdEl[i + 2].textContent = parseFloat(hourlyTotals.toFixed(2));
       trEl.appendChild(tdEl[i + 2]);
     }
-    beanTableEL.appendChild(trEl);
+    beansTableEl.appendChild(trEl);
   } else {
     tdEl[1].textContent = parseFloat((coffeeHouse[0].totalnumEmp + coffeeHouse[1].totalnumEmp + coffeeHouse[2].totalnumEmp + coffeeHouse[3].totalnumEmp + coffeeHouse[4].totalnumEmp).toFixed(2));
     trEl.appendChild(tdEl[1]);
@@ -142,12 +142,12 @@ coffeeHouse[2] = new CoffeeShop('Seattle Public Library', 9, 45, 2.6, 0.02);
 coffeeHouse[3] = new CoffeeShop('South Lake Union', 5, 18, 1.3, 0.04);
 coffeeHouse[4] = new CoffeeShop('Sea-Tac Airport', 28, 44, 1.1, 0.41);
 
-tableHeader(bean);
-tableHeader(barista);
+tableHeader(beans);
+tableHeader(baristas);
 for (var i = 0; i < coffeeHouse.length; i++) {
   coffeeHouse[i].calculations();
-  coffeeHouse[i].render(bean);
+  coffeeHouse[i].render(beans);
   coffeeHouse[i].render(baristas);
 }
-tableTotal(bean);
+tableTotal(beans);
 tableTotal(baristas);
